@@ -1,10 +1,11 @@
+from math import sqrt
 from tkinter import *
 import tkinter
 from tkinter import font
-from unittest import result
 import numpy as np
 
 calculation = ""
+
 def  add_to_calculation(symbol):
     global calculation
     calculation += str(symbol)
@@ -26,6 +27,11 @@ def evaluate_calculation():
     except:
         clear_field()
         text_result.insert(1.0,"Error")
+def inverse():
+    global calculation
+    calculation=str(1/eval(calculation))
+    text_result.delete(1.0, "end")
+    text_result.insert(1.0,calculation)
 
 def clear_field():
     global calculation
@@ -106,13 +112,13 @@ minus_op = Button(window,command=lambda:add_to_calculation("-"), text="-",bg="re
 minus_op.grid(row=5,column=3,padx=5,pady=5)
 
 # advanced operations
-sqrt_op = Button(window,text="\u221A",bg="red",height=btn_size,width=btn_size, image=virtualPixel,compound="c",font=btn_font)
+sqrt_op = Button(window,command=lambda:add_to_calculation("sqrt"),text="\u221A",bg="red",height=btn_size,width=btn_size, image=virtualPixel,compound="c",font=btn_font)
 sqrt_op.grid(row=1,column=4,padx=5,pady=5)
 
-modulo_op = Button(window,text="%",bg="red",height=btn_size,width=btn_size, image=virtualPixel,compound="c",font=btn_font)
+modulo_op = Button(window,command=lambda:add_to_calculation("%"),text="%",bg="red",height=btn_size,width=btn_size, image=virtualPixel,compound="c",font=btn_font)
 modulo_op.grid(row=2,column=4,padx=5,pady=5)
 
-inverse_op = Button(window,text="1/x",bg="red",height=btn_size,width=btn_size, image=virtualPixel,compound="c",font=btn_font)
+inverse_op = Button(window,command=inverse,text="1/x",bg="red",height=btn_size,width=btn_size, image=virtualPixel,compound="c",font=btn_font)
 inverse_op.grid(row=3,column=4,padx=5,pady=5)
 
 # equal
