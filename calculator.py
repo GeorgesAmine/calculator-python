@@ -1,27 +1,39 @@
- 
+"""
+This program is a simple calculator GUI made with tkinter as
+a clone to windows own calculator app
+"""
 from tkinter import Button, PhotoImage, Text, Tk, font
 
-# create calcuation string 
+# create calcuation string
 calculation = ""
 
 # method that adds to calculation string when buttons are pressed
 def  add_to_calculation(symbol):
+    """
+    adds a symbol to calculation string
+    """
     global calculation
-    # add passed symbol to calculation and display it 
+    # add passed symbol to calculation and display it
     calculation += str(symbol)
     text_result.delete(1.0, "end")
     text_result.insert(1.0, calculation)
 
 # method that implements the backspace functionality
 def erase_from_calculation():
+    """
+    Erases last char from calculation string
+    """
     global calculation
-    # erase last charachter from calculation and display the result 
+    # erase last charachter from calculation and display the result
     calculation = calculation[:-1]
     text_result.delete(1.0, "end")
     text_result.insert(1.0, calculation)
 
 # method that evaluates the calculation string
 def evaluate_calculation():
+    """"
+    Evaluates calculation string
+    """
     global calculation
     try:
         # evaluate calculation using native eval() function
@@ -29,13 +41,16 @@ def evaluate_calculation():
         calculation = str(eval(calculation))
         text_result.delete(1.0, "end")
         text_result.insert(1.0, calculation)
-    except:
+    except ZeroDivisionError:
         # in case of error clear the field and display error
         clear_field()
         text_result.insert(1.0, "Error")
 
 # method that does the inverse when inverse button is pressed
 def inverse():
+    """
+    Calculates the inverse of a number
+    """
     global calculation
     # inverse the evaluated calculation and display the result
     calculation = str(1/eval(calculation))
@@ -44,6 +59,9 @@ def inverse():
 
 # method that clears the field and initatize calculation string to ""
 def clear_field():
+    """
+    Clear the field
+    """
     global calculation
     calculation = ""
     text_result.delete(1.0, "end")
@@ -55,8 +73,8 @@ window.geometry("280x360")
 window.title("Calculator")
 window.config(background = "#D9E4F1")
 
-# create 1x1 image to pass to buttons in order to convert widths and 
-# heights to px 
+# create 1x1 image to pass to buttons in order to convert widths and
+# heights to px
 VIRTUAL_PIXEL = PhotoImage(width = 1, height = 1)
 
 # buttons styling
@@ -92,7 +110,7 @@ right_par.grid(row = 1, column = 3, padx = 5, pady = 5)
 
 # numbers pad
 num7 = Button(window, command = lambda:add_to_calculation(7), text = "7",
-              bg = NUMBER_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE, 
+              bg = NUMBER_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE,
               image = VIRTUAL_PIXEL, compound = "c", font = BUTTON_FONT)
 num7.grid(row = 2, column = 0, padx = 5, pady = 5)
 
@@ -107,12 +125,12 @@ num9 = Button(window, command = lambda:add_to_calculation(9), text = "9",
 num9.grid(row = 2, column = 2, padx = 5, pady = 5)
 
 num4 = Button(window, command = lambda:add_to_calculation(4), text = "4",
-              bg = NUMBER_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE, 
+              bg = NUMBER_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE,
               image = VIRTUAL_PIXEL, compound = "c", font = BUTTON_FONT)
 num4.grid(row = 3, column = 0, padx = 5, pady = 5)
 
 num5 = Button(window, command = lambda:add_to_calculation(5), text = "5",
-              bg = NUMBER_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE, 
+              bg = NUMBER_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE,
               image = VIRTUAL_PIXEL, compound = "c", font = BUTTON_FONT)
 num5.grid(row = 3, column = 1, padx = 5, pady = 5)
 
@@ -127,7 +145,7 @@ num1 = Button(window, command = lambda:add_to_calculation(1), text = "1",
 num1.grid(row = 4, column = 0, padx = 5, pady = 5)
 
 num2 = Button(window, command = lambda:add_to_calculation(2), text = "2",
-              bg = NUMBER_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE, 
+              bg = NUMBER_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE,
               image = VIRTUAL_PIXEL, compound = "c", font = BUTTON_FONT)
 num2.grid(row = 4, column = 1, padx = 5, pady = 5)
 
@@ -163,18 +181,18 @@ plus_op = Button(window, command = lambda:add_to_calculation("+"), text = "+",
 plus_op.grid(row = 4, column = 3, padx = 5, pady = 5)
 
 minus_op = Button(window, command = lambda:add_to_calculation("-"), text = "-",
-                  bg = OPERATION_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE, 
+                  bg = OPERATION_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE,
                   image = VIRTUAL_PIXEL, compound = "c", font = BUTTON_FONT)
 minus_op.grid(row = 5, column = 3, padx = 5, pady = 5)
 
 # advanced operations
 sqrt_op = Button(window, command = lambda:add_to_calculation("sqrt"), text = "\u221A",
-                 bg = OPERATION_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE, 
+                 bg = OPERATION_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE,
                  image = VIRTUAL_PIXEL, compound = "c", font = BUTTON_FONT)
 sqrt_op.grid(row = 1, column = 4, padx = 5, pady = 5)
 
 modulo_op = Button(window, command = lambda:add_to_calculation("%"), text = "%",
-                   bg = OPERATION_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE, 
+                   bg = OPERATION_BUTTON_COLOR, height = BUTTON_SIZE, width = BUTTON_SIZE,
                    image = VIRTUAL_PIXEL, compound = "c", font = BUTTON_FONT)
 modulo_op.grid(row = 2, column = 4, padx = 5, pady = 5)
 
